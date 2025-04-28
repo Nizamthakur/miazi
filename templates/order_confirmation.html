@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .order-details {
+            margin: 20px 0;
+        }
+        .order-details h2 {
+            font-size: 24px;
+            color: #007bff;
+        }
+        .order-details p {
+            margin: 5px 0;
+        }
+        .order-items {
+            margin: 20px 0;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        .order-items table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .order-items th, .order-items td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        .order-items th {
+            background-color: #f2f2f2;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .back-to-home {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+        .back-to-home:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <!-- Facebook Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1370732264288445');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1370732264288445&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Meta Pixel Code -->
+</head>
+<body>
+
+<div class="container">
+    <h1>Order Confirmation</h1>
+
+    <div class="order-details">
+        <h2>Thank you for your order!</h2>
+        <p>Your order ID: <strong>{{ order.id }}</strong></p>
+        <p>Order Date: <strong>{{ order.created_at|date:"F j, Y, g:i a" }}</strong></p>
+        <p>Payment Method: <strong>{{ order.payment_method }}</strong></p>
+        <p>Delivery Address: <strong>{{ order.address }}</strong></p>
+        <p>Contact Number: <strong>{{ order.phone }}</strong></p>
+    </div>
+
+    <div class="order-items">
+        <h2>Order Items</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.cart.items.all %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>৳{{ item.product.price|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="total">
+        <p>Total Amount: <strong>৳{{ order.total_amount|floatformat:2 }}</strong></p>
+    </div>
+
+    <a href="{% url 'home' %}" class="back-to-home">Back to Home</a>
+</div>
+
+</body>
+</html>

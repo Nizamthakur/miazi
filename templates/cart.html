@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shopping Cart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Load static files -->
+    {% load static %}
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!--===============================================================================================-->
+    <style>
+        /* Custom styles for mobile responsiveness */
+        @media (max-width: 768px) {
+            .table-shopping-cart {
+                font-size: 14px; /* Adjust font size for smaller screens */
+            }
+            .header-cart-content {
+                padding: 15px; /* Adjust padding for cart */
+            }
+            .wrap-num-product {
+                flex-direction: column; /* Stack buttons and input vertically */
+                align-items: flex-start; /* Align items to the start */
+            }
+            .btn-num-product-down,
+            .btn-num-product-up {
+                width: 40px; /* Adjust button size */
+                height: 40px; /* Adjust button size */
+            }
+            .num-product {
+                width: 50px; /* Adjust input size */
+                margin: 5px 0; /* Add margin for spacing */
+            }
+            .checkout-section {
+                padding: 20px; /* Adjust padding for checkout section */
+            }
+        }
+    </style>
+    <!-- Facebook Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1370732264288445');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1370732264288445&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Meta Pixel Code -->
+</head>
+<body class="animsition">
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+  <header>
+        <!-- Header desktop -->
+        <div class="container-menu-desktop">
+            <!-- Topbar -->
+
+
+            <div class="wrap-menu-desktop">
+                <nav class="limiter-menu-desktop container">
+
+                    <!-- Logo desktop -->
+                    <a href="{% url 'home' %}" class="logo" style="margin-top:20px;">
+                        <img src="{% static 'images/icons/logo1.png' %}" alt="IMG-LOGO">
+                    </a>
+
+                    <!-- Menu desktop -->
+                    <div class="menu-desktop">
+                        <ul class="main-menu">
+                            <li class="active-menu">
+                                <a href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'product_view' %}">Shop</a>
+                            </li>
+
+                            <li class="label1" data-label1="hot">
+                                <a href="{% url 'featured_products' %}">Features</a>
+                            </li>
+
+<!--                            <li>-->
+<!--                                <a href="blog.html">Blog</a>-->
+<!--                            </li>-->
+
+<!--                            <li>-->
+<!--                                <a href="about.html">About</a>-->
+<!--                            </li>-->
+
+                            <li>
+                                <a href="{% url 'contact' %}">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Icon header -->
+
+                </nav>
+            </div>
+        </div>
+
+        <!-- Header Mobile -->
+        <div class="wrap-header-mobile">
+            <!-- Logo mobile -->
+            <div class="logo-mobile">
+                <a href="{% url 'home' %}"><img src="{% static 'images/icons/logo1.png' %}" alt="IMG-LOGO"></a>
+            </div>
+
+
+
+            <!-- Button show menu -->
+            <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="menu-mobile">
+
+
+            <ul class="main-menu-m">
+                <li>
+                    <a href="{% url 'home' %}">Home</a>
+<!--                    <span class="arrow-main-menu-m">-->
+<!--                        <i class="fa fa-angle-right" aria-hidden="true"></i>-->
+<!--                    </span>-->
+                </li>
+
+                <li>
+                    <a href="{% url 'product_view' %}">Shop</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'featured_products' %}" class="label1 rs1" data-label1="hot">Features</a>
+                </li>
+
+<!--                <li>-->
+<!--                    <a href="blog.html">Blog</a>-->
+<!--                </li>-->
+
+<!--                <li>-->
+<!--                    <a href="about.html">About</a>-->
+<!--                </li>-->
+
+                <li>
+                    <a href="{% url 'contact' %}">Contact</a>
+                </li>
+            </ul>
+        </div>
+
+
+    </header>
+
+    <!-- Cart -->
+   <div class="wrap-header-cart js-panel-cart">
+        <div class="header-cart-content flex-w js-pscroll">
+            <ul class="header-cart-wrapitem w-full">
+                {% for item in cart_items %}
+                <li class="header-cart-item flex-w flex-t m-b-12">
+                    <div class="header-cart-item-img">
+                        <img src="{{ item.product.image.url }}" alt="IMG">
+                    </div>
+                    <div class="header-cart-item-txt p-t-8">
+                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                            {{ item.product.name }}
+                        </a>
+                        <span class="header-cart-item-info">
+                            {{ item.quantity }} x ৳{{ item.product.price }}
+                        </span>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+                <div class="w-full">
+                   <div class="header-cart-total w-full p-tb-40">
+                        Total: ${{ cart_total }}
+                   </div>
+
+                    <div class="header-cart-buttons flex-w w-full">
+                        <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                            View Cart
+                        </a>
+
+                        <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                            Check Out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <!-- breadcrumb -->
+    <div class="container">
+        <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+            <a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+                Home
+                <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+            </a>
+            <span class="stext-109 cl4">Shopping Cart</span>
+        </div>
+    </div>
+
+   <!-- Shopping Cart Section -->
+     <div class="bg0 p-t-75 p-b-85">
+        <div class="container">
+            <div class="row">
+                <!-- Cart Items Column -->
+                <div class="col-lg-8 col-xl-7 m-lr-auto m-b-50">
+                    <div class="m-l-25 m-r--38 m-lr-0-xl">
+                        <div class="wrap-table-shopping-cart">
+                            <table class="table-shopping-cart">
+                                <tr class="table_head">
+                                    <th class="column-1">Product</th>
+                                    <th class="column-2"></th>
+                                    <th class="column-3">Price</th>
+                                    <th class="column-4">Quantity</th>
+                                    <th class="column-5">Total</th>
+                                </tr>
+
+                                {% for item in cart_items %}
+                                <tr class="table_row">
+                                    <td class="column-1">
+                                        <div class="how-itemcart1">
+                                            <img src="{{ item.product.get_main_image_url }}" alt="{{ item.product.name }}">
+                                        </div>
+                                    </td>
+                                    <td class="column-2">{{ item.product.name }}</td>
+                                    <td class="column-3">
+                                        {% if item.product.sale_price %}
+                                            <span class="sale-price">৳{{ item.product.sale_price|floatformat:2 }}</span>
+                                            <del class="original-price">৳{{ item.product.price|floatformat:2 }}</del>
+                                        {% else %}
+                                            ৳{{ item.product.price|floatformat:2 }}
+                                        {% endif %}
+                                    </td>
+                                                                        <td class="column-4">
+                                        <div class="wrap-num-product flex-w m-l-auto m-r-0" style="gap: 10px; align-items: center;">
+                                            <!-- Quantity controls -->
+                                            <form method="post" action="{% url 'update_cart' item.product.id %}"
+                                                  class="d-flex align-items-center"
+                                                  style="gap: 5px;">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="size" value="{{ item.size }}">
+                                                <input type="hidden" name="color" value="{{ item.color }}">
+
+                                                <button type="submit" name="action" value="decrement"
+                                                        class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
+                                                        style="min-width: 35px; height: 35px;">
+                                                    -
+                                                </button>
+
+                                                <input class="mtext-104 cl3 txt-center num-product"
+                                                       type="number"
+                                                       name="quantity"
+                                                       value="{{ item.quantity }}"
+                                                       min="1"
+                                                       style="width: 60px; margin: 0 5px;">
+
+                                                <button type="submit" name="action" value="increment"
+                                                        class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
+                                                        style="min-width: 35px; height: 35px;">
+                                                    +
+                                                </button>
+                                            </form>
+
+                                            <!-- Remove button -->
+                                            <form method="post" action="{% url 'remove_from_cart' item.id %}" class="remove-form">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn-num-product-remove cl2remove hov-cl1 trans-04" title="Remove item" >
+                                                    <i class="fa fa-trash"></i> <!-- Bin icon from FontAwesome -->
+
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td class="column-5">৳{{ item.total_price|floatformat:2 }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center">Your cart is empty</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+
+<!-- Coupon Section -->
+                    <div class="coupon-section" style="margin: 20px 0; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <form method="post" action="{% url 'apply_coupon' %}">
+                            {% csrf_token %}
+                            <div class="flex-w flex-m">
+                                <div class="size-209" style="flex-grow: 1; margin-right: 10px;">
+                                    <input class="size-111 bor8 stext-102 cl2 p-lr-20"
+                                           type="text"
+                                           name="coupon_code"
+                                           placeholder="Enter coupon code"
+                                           style="width: 100%; padding: 12px; border: 1px solid #ddd;">
+                                </div>
+                                <div class="size-210">
+                                    <button type="submit"
+                                            style="padding: 12px 25px; background: #000; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+                                        Apply
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        {% if coupon %}
+                        <div class="coupon-info" style="margin-top: 15px; color: #28a745;">
+                            <span style="font-weight: 500;">Applied: {{ coupon.code }} </span>
+                            <a href="{% url 'remove_coupon' %}" style="color: #dc3545; margin-left: 10px;">Remove</a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+
+                    <div class="flex-w flex-t p-t-27 p-b-33" style="background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <!-- Subtotal -->
+                        <div class="size-208">
+                            <span class="mtext-101 cl2">Subtotal:</span>
+                        </div>
+                        <div class="size-209 p-t-1">
+                            <span class="mtext-110 cl2">৳{{ cart_total }}</span>
+                        </div>
+
+                        <!-- Discount -->
+                        {% if coupon %}
+                        <div class="size-208" style="margin-top: 15px;">
+                            <span class="mtext-101 cl2">Discount:</span>
+                        </div>
+                        <div class="size-209 p-t-1" style="margin-top: 15px;">
+                            <span class="mtext-110 cl2" style="color: #28a745;">-৳{{ discount|floatformat:2 }}</span>
+                        </div>
+                        {% endif %}
+
+                        <!-- Delivery Charge -->
+                        <div class="size-208" style="margin-top: 15px;">
+                            <span class="mtext-101 cl2">Delivery:</span>
+                        </div>
+                        <div class="size-209 p-t-1" style="margin-top: 15px;">
+                            <span class="mtext-110 cl2" data-delivery>৳{{ delivery_charge|floatformat:2 }}</span>
+                        </div>
+
+                        <!-- Grand Total -->
+                        <div class="size-208" style="margin-top: 15px;">
+                            <span class="mtext-101 cl2" style="font-weight: bold;">TotalY:</span>
+                        </div>
+                        <div class="size-209 p-t-1" style="margin-top: 15px;">
+                            <span class="mtext-110 cl2" id="grand-total-display" style="font-weight: bold;">৳{{ grand_total|floatformat:2 }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <!-- Checkout Column - UPDATED POSITION -->
+                <div class="col-lg-4 col-xl-5 m-lr-auto m-b-50">
+                    <div class="checkout-section" style="padding: 35px; background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">
+                        <h3 class="mtext-105 cl2 txt-center" style="margin-bottom: 30px; font-size: 24px; color: #333;">Checkout Information</h3>
+                        <form id="checkout-form" method="post" action="{% url 'checkout' %}">
+                            {% csrf_token %}
+                            <!-- Hidden delivery charge field -->
+                            <input type="hidden" name="delivery_charge" id="delivery-charge" value="{{ delivery_charge }}">
+
+                            <!-- Personal Information -->
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">Full Name:</label>
+                                <input class="size-111 bor8 stext-102 cl2" type="text" name="name" required
+                                       style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">Address:</label>
+                                <textarea class="size-111 bor8 stext-102 cl2" name="address" required
+                                          style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; height: 100px;"></textarea>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">Location:</label>
+                                <select class="size-111 bor8 stext-102 cl2" name="location" id="location" required
+                                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                    <option value="inside">Inside Dhaka (+৳80)</option>
+                                    <option value="outside">Outside Dhaka (+৳150)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">Phone Number:</label>
+                                <input class="size-111 bor8 stext-102 cl2" type="tel" name="phone" pattern="01\d{9}"
+                                       placeholder="01XXXXXXXXX" required
+                                       style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            </div>
+
+                            <div class="form-group" style="margin-bottom: 15px;">
+                                <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">Order Channel:</label>
+                                <select class="size-111 bor8 stext-102 cl2" name="order_channel" required
+                                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                    <option value="website">Website</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="whatsapp">WhatsApp</option>
+                                    <option value="tiktok">TikTok</option>
+                                </select>
+                            </div>
+
+                            <!-- Payment Method Section -->
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">Payment Method:</label>
+                                <select class="size-111 bor8 stext-102 cl2" name="payment_method" id="payment-method" required
+                                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                    <option value="bkash">Bkash</option>
+                                    <option value="nagad">Nagad</option>
+                                    <option value="cod">Cash on Delivery</option>
+                                </select>
+                            </div>
+
+                            <!-- Dynamic Payment Fields -->
+                            <!-- In the Dynamic Payment Fields section -->
+                            <div id="payment-details" style="display: none;">
+                                <!-- Bkash Fields -->
+                                <div class="payment-method-fields" id="bkash-fields">
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <div class="payment-instructions" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                            <p style="margin-bottom: 5px;">1. Go to Bkash</p>
+                                            <p style="margin-bottom: 5px;">2. Select Send Money</p>
+                                            <p style="margin-bottom: 5px;">3. Number: <strong>01616634418</strong></p>
+                                            <p style="margin-bottom: 5px;">4. Send Amount: <strong id="bkash-amount">৳{{ grand_total|floatformat:2 }}</strong></p>
+                                        </div>
+                                        <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">
+                                            Transaction ID (TRXID):
+                                        </label>
+                                        <input type="text" name="bkash_trxid" required
+                                               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                    </div>
+                                </div>
+
+                                <!-- Nagad Fields -->
+                                <div class="payment-method-fields" id="nagad-fields">
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <div class="payment-instructions" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                            <p style="margin-bottom: 5px;">1. Go to Nagad</p>
+                                            <p style="margin-bottom: 5px;">2. Select Send Money</p>
+                                            <p style="margin-bottom: 5px;">3. Number: <strong>01616634418</strong></p>
+                                            <p style="margin-bottom: 5px;">4. Send Amount: <strong id="nagad-amount">৳{{ grand_total|floatformat:2 }}</strong></p>
+                                        </div>
+                                        <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">
+                                            Transaction ID (TRXID):
+                                        </label>
+                                        <input type="text" name="nagad_trxid" required
+                                               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                    </div>
+                                </div>
+
+                                <!-- COD Fields -->
+                                <div class="payment-method-fields" id="cod-fields">
+                                    <div id="cod-outside-instructions" style="display: none;">
+                                        <div class="payment-instructions" style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                                            <p style="margin-bottom: 5px;">1. Go to Bkash/Nagad</p>
+                                            <p style="margin-bottom: 5px;">2. Select Send Money</p>
+                                            <p style="margin-bottom: 5px;">3. Number: <strong>01616634418</strong></p>
+                                            <p style="margin-bottom: 5px;">4. Send Courier Charge: <strong id="cod-courier-charge">৳150</strong></p>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom: 15px;">
+                                            <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">
+                                                Last 4 Digits of Mobile Number:
+                                            </label>
+                                            <input type="text" name="last_four_digits" pattern="\d{4}" maxlength="4" required
+                                                   style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Order Summary -->
+                            <div class="flex-w flex-t p-t-27 p-b-15" style="margin-bottom: 15px;">
+                                <div class="size-208">
+                                    <span class="mtext-101 cl2" style="font-weight: bold;">TotalX:</span>
+                                </div>
+                                <div class="size-209 p-t-1">
+                                     <span class="mtext-110 cl2" id="total-display" style="font-weight: bold;">৳{{ grand_total|floatformat:2 }}</span>
+                                    <span class="stext-102 cl6" style="font-size: 12px;">(incl. delivery)</span>
+                                </div>
+                            </div>
+
+                            <button type="submit" style="display: inline-block; padding: 10px 20px; background-color: black;
+                                      color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;
+                                      transition: background-color 0.3s;">
+                                Place Order
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- Footer -->
+    <footer class="bg3 p-t-75 p-b-32">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-sm-6 col-lg-4 p-b-50">
+                    <h4 class="stext-301 cl0 p-b-30">
+                        Help Desk
+                    </h4>
+
+                    <ul>
+                        <li class="p-b-10">
+                            <a href="https://steadfast.com.bd/tracking" class="stext-107 cl7 hov-cl1 trans-04">
+                                Track Order
+                            </a>
+                        </li>
+
+                        <li class="p-b-10">
+                            <a href="{% url 'return_policy' %}" class="stext-107 cl7 hov-cl1 trans-04">
+                                Return policy
+                            </a>
+                        </li>
+
+                        <li class="p-b-10">
+                            <a href="{% url 'shipping_partners' %}" class="stext-107 cl7 hov-cl1 trans-04">
+                                Shipping Partners
+                            </a>
+                        </li>
+                        <li class="p-b-10">
+                            <a href="{% url 'exchange_policy' %}" class="stext-107 cl7 hov-cl1 trans-04">
+                                Exchange policy
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+
+                <div class="col-sm-6 col-lg-4 p-b-50">
+                    <h4 class="stext-301 cl0 p-b-30">
+                        GET IN TOUCH
+                    </h4>
+
+                    <p class="stext-107 cl7 size-201">
+                        Any questions? Let us know in store at 192/A , Tilpapara, Khilgaon, Dhaka 1219 or call us on +8801840-154903.
+                    </p>
+
+                   <div class="p-t-27">
+                        <a href="https://www.facebook.com/profile.php?id=61572220262415" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+
+                        <a href="https://www.instagram.com/miabaaba/" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+
+                        <a href="https://wa.me/8801707365693?text=Hello%2C%20I%20have%20a%20question%20about%20your%20products%20of%20Miabaaba!" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                            <i class="fa fa-whatsapp"></i> <!-- Added WhatsApp -->
+                        </a>
+
+
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-lg-4 p-b-50">
+                    <h4 class="stext-301 cl0 p-b-30">
+                        Newsletter
+                    </h4>
+
+                    <form>
+                        <div class="wrap-input1 w-full p-b-4">
+                            <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+                            <div class="focus-input1 trans-04"></div>
+                        </div>
+
+                        <div class="p-t-18">
+                            <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+                                Subscribe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="p-t-40">
+               <div class="flex-c-m flex-w p-b-18">
+                <a href="#" class="m-all-1">
+                    <img class="payment-logo" src="{% static 'images/icons/Bkash-Logo.svg' %}" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img class="payment-logo" src="{% static 'images/icons/nagad.png' %}" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img class="payment-logo" src="{% static 'images/icons/icon-pay-02.png' %}" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img class="payment-logo" src="{% static 'images/icons/icon-pay-03.png' %}" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img class="payment-logo" src="{% static 'images/icons/icon-pay-04.png' %}" alt="ICON-PAY">
+                </a>
+
+                <a href="#" class="m-all-1">
+                    <img class="payment-logo" src="{% static 'images/icons/icon-pay-05.png' %}" alt="ICON-PAY">
+                </a>
+            </div>
+
+                <p class="stext-107 cl6 txt-center">
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | by <a href="https://teccmark.com" target="_blank">Miabaaba</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top -->
+    <div class="btn-back-to-top" id="myBtn">
+        <span class="symbol-btn-back-to-top">
+            <i class="zmdi zmdi-chevron-up"></i>
+        </span>
+    </div>
+
+  <!--===============================================================================================-->
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    // Handle checkout form submission
+    document.getElementById('checkout-form')?.addEventListener('submit', function(e) {
+        const submitBtn = this.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+        }
+    });
+
+    // Handle quantity changes
+    document.querySelectorAll('.num-product').forEach(input => {
+        input.addEventListener('change', function() {
+            const form = this.closest('form');
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'X-CSRFToken': csrftoken }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+
+    // Initialize select2 and perfect scrollbar
+    $(document).ready(function() {
+        $(".js-select2").each(function() {
+            $(this).select2({
+                minimumResultsForSearch: 20,
+                dropdownParent: $(this).next('.dropDownSelect2')
+            });
+        });
+
+        $('.js-pscroll').each(function() {
+            new PerfectScrollbar(this, {
+                wheelSpeed: 1,
+                scrollingThreshold: 1000,
+                wheelPropagation: false
+            });
+        });
+    });
+
+    // Main cart calculations
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all elements
+        const locationSelect = document.getElementById('location');
+        const subtotalElement = document.querySelector('.flex-w .mtext-110.cl2'); // Subtotal
+        const discountElement = document.querySelector('.mtext-110.cl2[style*="color: #28a745"]'); // Discount
+        const deliveryDisplay = document.querySelector('[data-delivery]');
+        const grandTotalDisplay = document.getElementById('grand-total-display');
+        const totalDisplay = document.getElementById('total-display'); // TotalX
+        const deliveryChargeInput = document.getElementById('delivery-charge');
+        const bkashAmount = document.getElementById('bkash-amount');
+        const nagadAmount = document.getElementById('nagad-amount');
+
+        // Function to parse currency values
+        function getCurrencyValue(element) {
+            if (!element) return 0;
+            return parseFloat(element.textContent.replace('৳', '')) || 0;
+        }
+
+        // Main calculation function
+        function updateTotals() {
+            // Get current values
+            const subtotal = getCurrencyValue(subtotalElement);
+            const discount = getCurrencyValue(discountElement);
+            const deliveryCharge = locationSelect.value === 'inside' ? 80 : 150;
+
+            // Calculate correct total
+            const grandTotal = (subtotal  + deliveryCharge + discount).toFixed(2);
+
+            // Update displays
+            if (deliveryDisplay) deliveryDisplay.textContent = `৳${deliveryCharge.toFixed(2)}`;
+            if (grandTotalDisplay) grandTotalDisplay.textContent = `৳${grandTotal}`;
+            if (totalDisplay) totalDisplay.textContent = `৳${grandTotal}`;
+
+            // Update hidden input
+            if (deliveryChargeInput) {
+                deliveryChargeInput.value = deliveryCharge;
+            }
+
+            // Update payment method amounts
+            if (bkashAmount) bkashAmount.textContent = `৳${grandTotal}`;
+            if (nagadAmount) nagadAmount.textContent = `৳${grandTotal}`;
+        }
+
+        // Update payment method fields
+        function updatePaymentFields() {
+            const paymentMethod = document.getElementById('payment-method');
+            const location = locationSelect.value;
+            const paymentDetails = document.getElementById('payment-details');
+            const codOutsideInstructions = document.getElementById('cod-outside-instructions');
+
+            // Reset all fields
+            document.querySelectorAll('.payment-method-fields').forEach(field => {
+                field.style.display = 'none';
+            });
+            document.querySelectorAll('.payment-method-fields input').forEach(input => {
+                input.required = false;
+            });
+
+            // Show payment details
+            if (paymentDetails) paymentDetails.style.display = 'block';
+
+            // Handle specific payment methods
+            if (paymentMethod.value === 'bkash') {
+                const fields = document.getElementById('bkash-fields');
+                if (fields) fields.style.display = 'block';
+                document.getElementById('bkash_trxid').required = true;
+            }
+            else if (paymentMethod.value === 'nagad') {
+                const fields = document.getElementById('nagad-fields');
+                if (fields) fields.style.display = 'block';
+                document.getElementById('nagad_trxid').required = true;
+            }
+            else if (paymentMethod.value === 'cod' && location === 'outside') {
+                if (codOutsideInstructions) codOutsideInstructions.style.display = 'block';
+            }
+        }
+
+        // Coupon form handling
+        document.getElementById('coupon-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitBtn = this.querySelector('button[type="submit"]');
+
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Applying...';
+            }
+
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: { 'X-CSRFToken': csrftoken }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert(data.message || 'Coupon application failed');
+                }
+            })
+            .finally(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Apply Coupon';
+                }
+            });
+        });
+
+        // Event listeners
+        locationSelect.addEventListener('change', function() {
+            updateTotals();
+            updatePaymentFields();
+        });
+
+        document.getElementById('payment-method')?.addEventListener('change', updatePaymentFields);
+
+        // Initialize
+        updateTotals();
+        updatePaymentFields();
+    });
+</script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

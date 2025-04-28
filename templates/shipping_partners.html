@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shipping Partners</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+        }
+        .partner-logo {
+            max-width: 150px; /* Set a maximum width for logos */
+            margin: 10px; /* Add some margin around logos */
+        }
+        .partner-logos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the logos */
+        }
+    </style>
+    <!-- Facebook Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1370732264288445');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1370732264288445&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Meta Pixel Code -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Shipping Partners</h1>
+        </header>
+
+        <section>
+<!--            <h2>Overview</h2>-->
+            <p>We partner with reliable shipping companies to ensure that your orders are delivered safely and on time. Below is a list of our trusted shipping partners.</p>
+        </section>
+
+        <section>
+            <h2>Our Shipping Partners</h2>
+            <div class="partner-logos">
+                <img src="{% static 'images/shipping-partners/steadfast.png' %}" alt="steadfast" class="partner-logo">
+                <img src="{% static 'images/shipping-partners/pathao.png' %}" alt="pathao " class="partner-logo">
+                <img src="{% static 'images/shipping-partners/shundarban.png' %}" alt="shundarban " class="partner-logo">
+<!--                <img src="{% static 'images/shipping-partners/dhl.svg' %}" alt="DHL" class="partner-logo">-->
+<!--                <img src="{% static 'images/shipping-partners/fedex.png' %}" alt="FedEx" class="partner-logo">-->
+<!--                <img src="{% static 'images/shipping-partners/ups.jpg' %}" alt="UPS" class="partner-logo">-->
+            </div>
+        </section>
+
+        <section>
+            <h2>Shipping Options</h2>
+            <p>We offer various shipping options to meet your needs:</p>
+            <ul>
+                <li><strong>Inside-Dhaka Shipping:</strong> Delivery within <strong>1-3</strong> Working days. Standard delivery charge is <strong>80 Taka</strong></li>
+                <li><strong>Outside-Dhaka Shipping:</strong> Delivery within <strong> 2-5 </strong> Working days. Standard delivery charge is <strong>150 Taka</strong></li>
+                <li><strong>Express-Shipping </strong><strong>(For Inside Dhaka Only)</strong>: Same-day delivery for urgent orders.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Tracking Your Order</h2>
+            <p>To track your order please follow the following steps. <br> <strong>Step 1.</strong> Visit www.miabaaba.com <br> <strong>Step 2. </strong> Go to the track my order. <br><strong> Step 3.</strong> Paste your tracking id. <Strong>See your invoice for the tracking Id Example "3DNU3FG" </Strong> </p>
+
+        </section>
+
+
+    </div>
+</body>
+</html>

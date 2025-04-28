@@ -1,0 +1,196 @@
+
+<style>
+.sales-report {
+    font-family: 'Arial', sans-serif;
+    padding: 25px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.sales-report h1 {
+    color: #2c3e50;
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+}
+
+.sales-report h2 {
+    color: #34495e;
+    font-size: 1.6em;
+    margin: 25px 0 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+.sales-report table {
+    width: 100%;
+    margin-bottom: 25px;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.sales-report th {
+    background: #3498db;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.sales-report td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ecf0f1;
+    color: #2c3e50;
+}
+
+.sales-report tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.sales-report tr:hover {
+    background-color: #f1f4f7;
+}
+
+@media (max-width: 768px) {
+    .sales-report {
+        padding: 15px;
+    }
+    
+    .sales-report table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .sales-report h1 {
+        font-size: 1.8em;
+    }
+    
+    .sales-report h2 {
+        font-size: 1.4em;
+    }
+}
+
+.total-amount {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.empty-message {
+    color: #95a5a6;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+</style>
+
+<div class="sales-report">
+    <h1>📈 Sales Report</h1>
+
+    <!-- Daily Sales Section -->
+    <h2>📅 Daily Sales</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in daily_sales %}
+            <tr>
+                <td>{{ entry.date|date:"Y-m-d" }}</td>
+                <td>{{ entry.total_quantity }}</td>
+                <td class="total-amount">৳{{ entry.total_sales|floatformat:2 }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="empty-message">No daily sales data available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Weekly Sales Section -->
+    <h2>🗓 Weekly Sales</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Week Start</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in weekly_sales %}
+            <tr>
+                <td>{{ entry.week|date:"Y-m-d" }}</td>
+                <td>{{ entry.total_quantity }}</td>
+                <td class="total-amount">৳{{ entry.total_sales|floatformat:2 }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="empty-message">No weekly sales data available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Monthly Sales Section -->
+    <h2>📆 Monthly Sales</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Month</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in monthly_sales %}
+            <tr>
+                <td>{{ entry.month|date:"Y-m" }}</td>
+                <td>{{ entry.total_quantity }}</td>
+                <td class="total-amount">৳{{ entry.total_sales|floatformat:2 }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="empty-message">No monthly sales data available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Product Sales Section -->
+    <h2>📦 Product-wise Sales</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in product_sales %}
+            <tr>
+                <td>{{ product.product__name }}</td>
+                <td>{{ product.product__sku }}</td>
+                <td>{{ product.total_quantity }}</td>
+                <td class="total-amount">৳{{ product.total_sales|floatformat:2 }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="empty-message">No product sales data available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

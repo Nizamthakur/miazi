@@ -1,0 +1,226 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Product Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!-- Facebook Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1370732264288445');
+    fbq('track', 'PageView');
+    </script>
+    <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1370732264288445&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Facebook Meta Pixel Code -->
+</head>
+<body class="animsition">
+
+    <!-- Header -->
+    <!-- Keep your header content here -->
+
+    <!-- Product Detail Section -->
+    <section class="sec-product-detail bg0 p-t-65 p-b-60">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <div class="container">
+                <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+                    <a href="{% url 'home' %}" class="stext-109 cl8 hov-cl1 trans-04">
+                        Home
+                        <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+                    </a>
+                    <span class="stext-109 cl4">
+                        {{ product.name }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Main Product Content -->
+                {% include 'products/partials/product_detail_content.html' %}
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="bor10 m-t-50 p-t-43 p-b-40">
+                <!-- Keep your tabs content here -->
+            </div>
+
+            <!-- SKU & Categories -->
+            <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
+                <span class="stext-107 cl6 p-lr-25">
+                    SKU: {{ product.sku }}
+                </span>
+                <span class="stext-107 cl6 p-lr-25">
+                    Categories: {{ product.category.all|join:", " }}
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="sec-relate-product bg0 p-t-45 p-b-105">
+        <div class="container">
+            <!-- Keep your related products content here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Keep your footer content here -->
+
+    <!-- Quick View Modal -->
+    <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+        <div class="overlay-modal1 js-hide-modal1"></div>
+        <div class="container">
+            <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+                <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                    <img src="{% static 'images/icons/icon-close.png' %}" alt="CLOSE">
+                </button>
+                <div class="row" id="quick-view-content">
+                    <!-- AJAX Content Loads Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/slick/slick.min.js' %}"></script>
+    <script src="{% static 'js/slick-custom.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/parallax100/parallax100.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/MagnificPopup/jquery.magnific-popup.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/isotope/isotope.pkgd.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
+    <!--===============================================================================================-->
+    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Quick View Handling
+        document.querySelectorAll('.js-show-modal1').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.dataset.productId;
+
+                // Show loading spinner
+                const quickViewContent = document.getElementById('quick-view-content');
+                quickViewContent.innerHTML = `
+                    <div class="col-12 text-center p-t-50">
+                        <i class="fa fa-spinner fa-spin fa-3x cl2"></i>
+                    </div>
+                `;
+
+                fetch(`/products/${productId}/quick-view/`)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.text();
+                    })
+                    .then(html => {
+                        quickViewContent.innerHTML = html;
+
+                        // Reinitialize plugins
+                        $('.js-select2').each(function(){
+                            $(this).select2({
+                                minimumResultsForSearch: 20,
+                                dropdownParent: $(this).next('.dropDownSelect2')
+                            });
+                        });
+
+                        $('.slick3').slick({
+                            slidesToShow: 1,
+                            slidesToScroll: 1,
+                            arrows: true,
+                            fade: true,
+                            asNavFor: '.wrap-slick3-dots',
+                            infinite: false
+                        });
+
+                        $('.gallery-lb').magnificPopup({
+                            delegate: 'a',
+                            type: 'image',
+                            gallery: { enabled: true },
+                            mainClass: 'mfp-fade'
+                        });
+
+                        $('.js-modal1').addClass('show-modal1');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        quickViewContent.innerHTML = `
+                            <div class="col-12 text-center p-t-50">
+                                <p class="cl2">Error loading product details</p>
+                            </div>
+                        `;
+                    });
+            });
+        });
+
+        // Close modal
+        document.querySelectorAll('.js-hide-modal1').forEach(button => {
+            button.addEventListener('click', function() {
+                $('.js-modal1').removeClass('show-modal1');
+            });
+        });
+    });
+    </script>
+
+    <!--===============================================================================================-->
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
