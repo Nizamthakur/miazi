@@ -384,7 +384,7 @@
 
                         <!-- Grand Total -->
                         <div class="size-208" style="margin-top: 15px;">
-                            <span class="mtext-101 cl2" style="font-weight: bold;">TotalY:</span>
+                            <span class="mtext-101 cl2" style="font-weight: bold;">Total:</span>
                         </div>
                         <div class="size-209 p-t-1" style="margin-top: 15px;">
                             <span class="mtext-110 cl2" id="grand-total-display" style="font-weight: bold;">৳{{ grand_total|floatformat:2 }}</span>
@@ -420,8 +420,8 @@
                                 <label class="stext-102 cl3" style="font-weight: bold; margin-bottom: 5px;">Location:</label>
                                 <select class="size-111 bor8 stext-102 cl2" name="location" id="location" required
                                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
-                                    <option value="inside">Inside Dhaka (+৳80)</option>
-                                    <option value="outside">Outside Dhaka (+৳150)</option>
+                                    <option value="inside">Inside Dhaka (+৳70)</option>
+                                    <option value="outside">Outside Dhaka (+৳110)</option>
                                 </select>
                             </div>
 
@@ -514,7 +514,7 @@
                             <!-- Order Summary -->
                             <div class="flex-w flex-t p-t-27 p-b-15" style="margin-bottom: 15px;">
                                 <div class="size-208">
-                                    <span class="mtext-101 cl2" style="font-weight: bold;">TotalX:</span>
+                                    <span class="mtext-101 cl2" style="font-weight: bold;">Total:</span>
                                 </div>
                                 <div class="size-209 p-t-1">
                                      <span class="mtext-110 cl2" id="total-display" style="font-weight: bold;">৳{{ grand_total|floatformat:2 }}</span>
@@ -579,7 +579,7 @@
                     </h4>
 
                     <p class="stext-107 cl7 size-201">
-                        Any questions? Let us know in store at 192/A , Tilpapara, Khilgaon, Dhaka 1219 or call us on +8801840-154903.
+                        Any questions? Let us know in store at 192/A , Tilpapara, Khilgaon, Dhaka 1219 or call us on +8801707365693.
                     </p>
 
                    <div class="p-t-27">
@@ -760,7 +760,7 @@
             // Get current values
             const subtotal = getCurrencyValue(subtotalElement);
             const discount = getCurrencyValue(discountElement);
-            const deliveryCharge = locationSelect.value === 'inside' ? 80 : 150;
+            const deliveryCharge = locationSelect.value === 'inside' ? 70 : 110;
 
             // Calculate correct total
             const grandTotal = (subtotal  + deliveryCharge + discount).toFixed(2);

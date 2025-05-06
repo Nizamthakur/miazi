@@ -1,28 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load static %}
     <meta charset="utf-8">
     <style>
-        body { font-family: Arial, sans-serif; margin: 2cm; }
-        .header { text-align: center; border-bottom: 2px solid #000; margin-bottom: 30px; }
-        .table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-        .table th { background: #f5f5f5; padding: 12px; }
-        .table td { padding: 10px; border-bottom: 1px solid #ddd; }
-        .total-row { font-weight: bold; }
-        .footer { margin-top: 50px; text-align: center; color: #666; }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 1.5cm;
+            font-size: 12px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #000;
+        }
+        .logo {
+            max-width: 100px; /* smaller logo */
+            height: auto;
+            margin-bottom: 5px;
+        }
+        .invoice-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        .invoice-info div {
+            margin-bottom: 3px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+        .table th, .table td {
+            padding: 6px 8px;
+            text-align: left;
+        }
+        .table th {
+            background: #f5f5f5;
+            font-weight: bold;
+        }
+        .table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .total-row {
+            font-weight: bold;
+            background: #e6e6e6;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 11px;
+        }
+        .company-info {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 12px;
+        }
+        /* Prevent page break inside sections */
+        .header, .invoice-info, .table, .company-info, .footer {
+            page-break-inside: avoid;
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h2>Invoice #{{ order.order_id }}</h2>
+       <img src="{{ logo_url }}" alt="Miabaaba Logo" class="logo">
+        <h2>Invoice #{{ formatted_order_id }}</h2>
         <p>Date: {{ date }}</p>
     </div>
 
-    <div class="customer-info">
-        <h3>Bill To:</h3>
-        <p>{{ order.name }}<br>
-        {{ order.address }}<br>
-        Phone: {{ order.phone }}</p>
+    <div class="invoice-info">
+        <div>
+            <strong>Bill To:</strong><br>
+            {{ order.name }}<br>
+            {{ order.address }}<br>
+            Phone: {{ order.phone }}
+        </div>
+        <div>
+            <strong>Payment Method:</strong> {{ order.payment_method }}<br>
+            <strong>Order Date:</strong> {{ order.created_at|date:"F j, Y, g:i a" }}
+        </div>
     </div>
 
     <table class="table">
@@ -39,29 +101,32 @@
             <tr>
                 <td>{{ item.product.name }}</td>
                 <td>{{ item.quantity }}</td>
-                <td>৳{{ item.price }}</td>
                 <td>৳{{ item.price|floatformat:2 }}</td>
+                <td>৳{{ item.total_price|floatformat:2 }}</td>
             </tr>
             {% endfor %}
         </tbody>
-    </table>
-
-    <div style="float: right; width: 300px;">
-        <table class="table">
-            <tr>
-                <td>Subtotal:</td>
+        <tfoot>
+            <tr class="total-row">
+                <td colspan="3"><strong>Subtotal:</strong></td>
                 <td>৳{{ subtotal|floatformat:2 }}</td>
             </tr>
             <tr class="total-row">
-                <td>Grand Total:</td>
+                <td colspan="3"><strong>Grand Total:</strong></td>
                 <td>৳{{ total|floatformat:2 }}</td>
             </tr>
-        </table>
+        </tfoot>
+    </table>
+
+    <div class="company-info">
+        <p>Thank you for shopping with Miabaaba!</p>
+        <p>For any inquiries, please contact us at:</p>
+        <p>Email: info@miabaaba.com</p>
+        <p>Phone: +8801707365693.</p>
     </div>
 
     <div class="footer">
-        <p>Thank you for your order!</p>
-        <p>Payment Method: {{ order.payment_method }}</p>
+        <p>© 2025 miabaaba. All rights reserved.</p>
     </div>
 </body>
 </html>

@@ -6,7 +6,12 @@ SECRET_KEY = 'django-insecure-=8##6aex3c331s4od$l7@)gf4y_7vu00c9r)6_#$9xo2-3fr1^
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["www.miabaaba.com","miabaaba.com"]
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '160.191.163.18',
+    'miabaaba.com',
+    'www.miabaaba.com',]
 
 
 

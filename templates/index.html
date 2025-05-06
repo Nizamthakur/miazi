@@ -1,60 +1,74 @@
 <!DOCTYPE html>
+{% load custom_filters static %}
 <html lang="en">
 <head>
-    <title>Home</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Load static files -->
-    {% load static %}
-    <!--===============================================================================================-->
+
+    <title>Miabaaba | Smart Shopping for Smart Living!</title>
+    <meta name="description" content="Miabaaba – Smart Shopping for Smart Living! Explore gadgets, electronics, and home accessories tailored to simplify your lifestyle.">
+    <meta name="keywords" content="smart gadget, router, powerbank, earbuds, smartwatch, speaker, pocket router, gadget, electronics, mobile accessories, IP camera, home appliances">
+    <meta name="author" content="Miabaaba">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.miabaaba.com/">
+
+    <!-- Open Graph (Facebook) -->
+    <meta property="og:title" content="Miabaaba | Smart Shopping for Smart Living!">
+    <meta property="og:description" content="Shop smart gadgets, electronics, home appliances, and mobile accessories at Miabaaba.">
+    <meta property="og:url" content="https://www.miabaaba.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{% static 'images/og-image.jpg' %}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Miabaaba | Smart Shopping for Smart Living!">
+    <meta name="twitter:description" content="Shop smart gadgets, electronics, home appliances, and mobile accessories at Miabaaba.">
+    <meta name="twitter:image" content="{% static 'images/og-image.jpg' %}">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <!--===============================================================================================-->
-<!-- Facebook Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1370732264288445');
-    fbq('track', 'PageView');
+
+    <!-- Preload Font (Optional) -->
+    <link rel="preload" href="{% static 'fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2' %}" as="font" type="font/woff2" crossorigin>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/linearicons-v1.0.0/icon-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/animate/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/select2/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/MagnificPopup/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <!-- Facebook Meta Pixel Code -->
+    <script defer>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1370732264288445');
+        fbq('track', 'PageView');
     </script>
     <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1370732264288445&ev=PageView&noscript=1"/>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=1370732264288445&ev=PageView&noscript=1"/>
     </noscript>
     <!-- End Facebook Meta Pixel Code -->
 </head>
+
 <body class="animsition">
 
     <!-- Header -->
@@ -324,9 +338,10 @@
 
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">
-                            <span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                {{ product.name }}
-                            </span>
+                            <a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-show-modal1 p-b-6"
+                                   data-product-id="{{ product.id }}">
+                                    {{ product.name }}
+                                </a>
                             <!-- Add SKU here -->
                             <span class="stext-105 cl3 sku-text mb-2">
                                 SKU: {{ product.sku }}
@@ -483,9 +498,10 @@
 
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l ">
-                            <span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                {{ product.name }}
-                            </span>
+                            <a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-show-modal1 p-b-6"
+                                   data-product-id="{{ product.id }}">
+                                    {{ product.name }}
+                                </a>
                             <span class="stext-105 cl3">
                                 SKU: {{ product.sku }}
                             </span>
@@ -559,7 +575,7 @@
                     </h4>
 
                     <p class="stext-107 cl7 size-201">
-                        Any questions? Let us know in store at 192/A , Tilpapara, Khilgaon, Dhaka 1219 or call us on +8801840-154903.
+                        Any questions? Let us know in store at 192/A , Tilpapara, Khilgaon, Dhaka 1219 or call us on +8801707365693.
                     </p>
 
                    <div class="p-t-27">
@@ -705,310 +721,320 @@
 <!--===============================================================================================-->
 <script src="{% static 'vendor/sweetalert/sweetalert.min.js' %}"></script>
 <script>
-    // Wishlist functionality
-    const handleWishlist = (element, message) => {
+// Wishlist functionality
+const handleWishlist = async (element, message) => {
     const productId = element.closest('[data-product-id]')?.dataset.productId;
     if (!productId) return;
 
-    fetch(`/wishlist/add/${productId}/`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('wishlist-count').dataset.notify = data.count;
-            swal(message, '', 'success');
-        })
-        .catch(error => {
-            swal('Please login first!', '', 'error');
-        });
+    try {
+        const response = await fetch(`/wishlist/add/${productId}/`);
+        const data = await response.json();
+        document.getElementById('wishlist-count').dataset.notify = data.count;
+        swal(message, '', 'success');
+    } catch (error) {
+        swal('Please login first!', '', 'error');
+    }
 };
 
-    document.querySelectorAll('.js-addwish-b2, .js-addwish-detail').forEach(button => {
-        button.addEventListener('click', function(e) {
+document.querySelectorAll('.js-addwish-b2, .js-addwish-detail').forEach(button => {
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        handleWishlist(this, 'Added to wishlist!');
+    });
+});
+
+// Quick View with vertical thumbnails
+document.addEventListener('DOMContentLoaded', function () {
+    // Quick View Modal
+    document.querySelectorAll('.js-show-modal1').forEach(button => {
+        button.addEventListener('click', async function (e) {
             e.preventDefault();
-            handleWishlist(this, 'Added to wishlist!');
+            const productId = this.dataset.productId;
+
+            try {
+                const response = await fetch(`/products/${productId}/quick-view/`);
+                const data = await response.json();
+                const quickViewHTML = generateQuickViewHTML(data, productId);
+                const quickViewContent = document.getElementById('quick-view-content');
+                quickViewContent.innerHTML = quickViewHTML;
+
+                // Reinitialize plugins and elements
+                initSelect2();
+                initMagnificPopup();
+                initSlickSlider();
+                initThumbnailClickHandler();
+
+                // Open modal
+                $('.js-modal1').addClass('show-modal1');
+            } catch (error) {
+                swal('Error loading product details!', '', 'error');
+                console.error('Error:', error);
+            }
         });
     });
 
-    // Quick View with vertical thumbnails
-    document.addEventListener('DOMContentLoaded', function() {
-        // Quick View Modal
-        document.querySelectorAll('.js-show-modal1').forEach(button => {
-            button.addEventListener('click', async function(e) {
-                e.preventDefault();
-                const productId = this.dataset.productId;
+    // Add to cart handler
+    document.addEventListener('click', async (e) => {
+        if (e.target.classList.contains('js-addcart-quickview')) {
+            e.preventDefault();
+            const button = e.target;
+            const productId = button.dataset.productId;
+            const mandatory = button.dataset.mandatory;
+            const quantityInput = button.closest('.respon6-next').querySelector('.num-product');
+            const quantity = parseInt(quantityInput.value) || 1;
 
-                try {
-                    const response = await fetch(`/products/${productId}/quick-view/`);
-                    const data = await response.json();
+            // Get selections
+            const size = document.querySelector('.size-select')?.value || '';
+            const color = document.querySelector('.color-select')?.value || '';
 
-                    // Price display
-                    const priceHtml = data.sale_price
-                        ? `<span class="stext-105 cl3" style="text-decoration: line-through;">৳${data.price}</span>
-                           <span class="stext-105 cl1 p-l-10">৳${data.sale_price}</span>`
-                        : `<span class="stext-105 cl3">৳${data.price}</span>`;
+            // Validate mandatory fields
+            let errorMsg = '';
+            if (mandatory === 'both' && (!size || !color)) {
+                errorMsg = 'Please select both size and color';
+            } else if (mandatory === 'size' && !size) {
+                errorMsg = 'Please select a size';
+            } else if (mandatory === 'color' && !color) {
+                errorMsg = 'Please select a color';
+            }
 
-                    // Size selector
-                    const sizeSelector = data.sizes.length > 0 ? `
-                        <div class="flex-w flex-r-m p-b-10">
-                            <div class="size-203 flex-c-m respon6">Size</div>
-                            <div class="size-204 respon6-next">
-                                <div class="rs1-select2 bor8 bg0">
-                                    <select class="js-select2 size-select"
-                                        ${['size', 'both'].includes(data.mandatory) ? 'required' : ''}>
-                                        <option value="">Choose size</option>
-                                        ${data.sizes.map(size => `
-                                            <option value="${size}">${size}</option>
-                                        `).join('')}
-                                    </select>
-                                    <div class="dropDownSelect2"></div>
-                                </div>
-                            </div>
-                        </div>` : '';
+            if (errorMsg) return swal(errorMsg, '', 'warning');
 
-                    // Color selector
-                    const colorSelector = data.colors.length > 0 ? `
-                        <div class="flex-w flex-r-m p-b-10">
-                            <div class="size-203 flex-c-m respon6">Color</div>
-                            <div class="size-204 respon6-next">
-                                <div class="rs1-select2 bor8 bg0">
-                                    <select class="js-select2 color-select"
-                                        ${['color', 'both'].includes(data.mandatory) ? 'required' : ''}>
-                                        <option value="">Choose color</option>
-                                        ${data.colors.map(color => `
-                                            <option value="${color}">${color}</option>
-                                        `).join('')}
-                                    </select>
-                                    <div class="dropDownSelect2"></div>
-                                </div>
-                            </div>
-                        </div>` : '';
+            try {
+                const response = await fetch(`/cart/add/${productId}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken'),
+                    },
+                    body: JSON.stringify({
+                        quantity: quantity,
+                        size: size,
+                        color: color
+                    })
+                });
 
-                    // Thumbnails and main image
-                    const imageSections = `
-                        <div class="row">
-                            <div class="col-3 pr-2">
-                                <div class="vertical-thumbnails">
-                                    ${data.images.map((image, index) => `
-                                        <div class="thumbnail-item ${index === 0 ? 'active' : ''}"
-                                            data-index="${index}">
-                                            <img src="${image}"
-                                                alt="Thumbnail ${index + 1}"
-                                                class="img-fluid">
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                            <div class="col-9 pl-2">
-                                <div class="slick3 gallery-lb">
-                                    ${data.images.map(image => `
-                                        <div class="item-slick3" data-thumb="${image}">
-                                            <div class="wrap-pic-w pos-relative">
-                                                <img src="${image}" alt="${data.name}">
-                                                <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                    href="${image}">
-                                                    <i class="fa fa-expand"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        </div>`;
-
-                    // Full HTML template
-                    const quickViewHTML = `
-                        <div class="row">
-                            <div class="col-md-6 col-lg-7 p-b-30">
-                                <div class="p-l-25 p-r-30 p-lr-0-lg">
-                                    ${imageSections}
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-5 p-b-30">
-                                <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                    <h4 class="mtext-105 cl2 js-name-detail p-b-14">${data.name}</h4>
-                                    <div class="flex-w mb-3">
-                                        <span class="stext-102 cl3">SKU: ${data.sku}</span>
-                                    </div>
-                                    ${priceHtml}
-                                    <p class="stext-102 cl3 p-t-23">${data.description}</p>
-                                    <div class="p-t-33">
-                                        ${sizeSelector}
-                                        ${colorSelector}
-                                        <div class="flex-w flex-r-m p-b-10">
-                                            <div class="size-204 flex-w flex-m respon6-next">
-                                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                        <i class="fs-16 zmdi zmdi-minus"></i>
-                                                    </div>
-                                                    <input class="mtext-104 cl3 txt-center num-product"
-                                                        type="number" name="quantity" value="1" min="1">
-                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                        <i class="fs-16 zmdi zmdi-plus"></i>
-                                                    </div>
-                                                </div>
-                                                <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-quickview"
-                                                    data-product-id="${productId}"
-                                                    data-mandatory="${data.mandatory}">
-                                                    Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-
-                    const quickViewContent = document.getElementById('quick-view-content');
-                    quickViewContent.innerHTML = quickViewHTML;
-
-                    // Reinitialize plugins
-                    initSelect2();
-                    initMagnificPopup();
-
-                    // Initialize slick slider
-                    const slider = $('.slick3').slick({
-                        slidesToShow: 1,
-                        slidesToScroll: 1,
-                        arrows: true,
-                        fade: true,
-                        dots: true,
-                        appendDots: '.wrap-slick3-dots',
-                        dotsClass: 'slick3-dots',
-                        appendArrows: '.wrap-slick3-arrows',
-                        prevArrow: '<button class="arrow-slick3 prev-slick3"><i class="fa fa-angle-left"></i></button>',
-                        nextArrow: '<button class="arrow-slick3 next-slick3"><i class="fa fa-angle-right"></i></button>',
+                const data = await response.json();
+                if (data.success) {
+                    swal('Added to cart!', '', 'success');
+                    document.querySelectorAll('.icon-header-noti').forEach(icon => {
+                        icon.dataset.notify = data.cart_count;
                     });
-
-                    // Thumbnail click handler
-                    document.querySelectorAll('.thumbnail-item').forEach(thumbnail => {
-                        thumbnail.addEventListener('click', function() {
-                            const index = parseInt(this.dataset.index);
-                            document.querySelectorAll('.thumbnail-item').forEach(item =>
-                                item.classList.remove('active'));
-                            this.classList.add('active');
-                            slider.slick('slickGoTo', index);
-                        });
-                    });
-
-                    $('.js-modal1').addClass('show-modal1');
-
-                } catch (error) {
-                    swal('Error loading product details!', '', 'error');
-                    console.error('Error:', error);
+                } else {
+                    throw new Error(data.message || 'Failed to add to cart');
                 }
-            });
-        });
-
-        // Add to cart handler
-        document.addEventListener('click', async (e) => {
-            if(e.target.classList.contains('js-addcart-quickview')) {
-                e.preventDefault();
-                const button = e.target;
-                const productId = button.dataset.productId;
-                const mandatory = button.dataset.mandatory;
-                const quantityInput = button.closest('.respon6-next').querySelector('.num-product');
-                const quantity = parseInt(quantityInput.value) || 1;
-
-                // Get selections
-                const size = document.querySelector('.size-select')?.value || '';
-                const color = document.querySelector('.color-select')?.value || '';
-
-                // Validate mandatory fields
-                let errorMsg = '';
-                if(mandatory === 'both' && (!size || !color)) {
-                    errorMsg = 'Please select both size and color';
-                } else if(mandatory === 'size' && !size) {
-                    errorMsg = 'Please select a size';
-                } else if(mandatory === 'color' && !color) {
-                    errorMsg = 'Please select a color';
-                }
-
-                if(errorMsg) return swal(errorMsg, '', 'warning');
-
-                try {
-                    const response = await fetch(`/cart/add/${productId}/`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': getCookie('csrftoken'),
-                        },
-                        body: JSON.stringify({
-                            quantity: quantity,
-                            size: size,
-                            color: color
-                        })
-                    });
-
-                    const data = await response.json();
-
-                    if(data.success) {
-                        swal('Added to cart!', '', 'success');
-                        document.querySelectorAll('.icon-header-noti').forEach(icon => {
-                            icon.dataset.notify = data.cart_count;
-                        });
-                    } else {
-                        throw new Error(data.message || 'Failed to add to cart');
-                    }
-                } catch (error) {
-                    swal(error.message, '', 'error');
-                    console.error('Error:', error);
-                }
+            } catch (error) {
+                swal(error.message, '', 'error');
+                console.error('Error:', error);
             }
-        });
-
-        // Quantity buttons
-        document.addEventListener('click', (e) => {
-            const wrapNum = e.target.closest('.wrap-num-product');
-            if (!wrapNum) return;
-
-            const input = wrapNum.querySelector('.num-product');
-            let value = parseInt(input.value) || 1;
-
-            if(e.target.closest('.btn-num-product-down')) {
-                input.value = value > 1 ? value - 1 : 1;
-            }
-            else if(e.target.closest('.btn-num-product-up')) {
-                input.value = value + 1;
-            }
-        });
-
-        // Close modal
-        document.querySelectorAll('.js-hide-modal1').forEach(button => {
-            button.addEventListener('click', () => {
-                $('.js-modal1').removeClass('show-modal1');
-            });
-        });
-
-        // CSRF helper
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
         }
     });
-</script>
-<!--===============================================================================================-->
-<script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
-<script>
-    function initPerfectScrollbar() {
-        $('.js-pscroll').each(function(){
-            new PerfectScrollbar(this, {
-                wheelSpeed: 1,
-                scrollingThreshold: 1000,
-                wheelPropagation: false,
+
+    // Quantity buttons
+    document.addEventListener('click', (e) => {
+        const wrapNum = e.target.closest('.wrap-num-product');
+        if (!wrapNum) return;
+
+        const input = wrapNum.querySelector('.num-product');
+        let value = parseInt(input.value) || 1;
+
+        if (e.target.closest('.btn-num-product-down')) {
+            input.value = value > 1 ? value - 1 : 1;
+        } else if (e.target.closest('.btn-num-product-up')) {
+            input.value = value + 1;
+        }
+    });
+
+    // Close modal
+    document.querySelectorAll('.js-hide-modal1').forEach(button => {
+        button.addEventListener('click', () => {
+            $('.js-modal1').removeClass('show-modal1');
+        });
+    });
+
+    // CSRF helper
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // Helper Functions
+
+    // Generate Quick View HTML
+    function generateQuickViewHTML(data, productId) {
+        const priceHtml = data.sale_price
+            ? `<span class="stext-105 cl3" style="text-decoration: line-through;">৳${data.price}</span>
+               <span class="stext-105 cl1 p-l-10">৳${data.sale_price}</span>`
+            : `<span class="stext-105 cl3">৳${data.price}</span>`;
+
+        const sizeSelector = data.sizes.length > 0 ? `
+            <div class="flex-w flex-r-m p-b-10">
+                <div class="size-203 flex-c-m respon6">Size</div>
+                <div class="size-204 respon6-next">
+                    <div class="rs1-select2 bor8 bg0">
+                        <select class="js-select2 size-select"
+                            ${['size', 'both'].includes(data.mandatory) ? 'required' : ''}>
+                            <option value="">Choose size</option>
+                            ${data.sizes.map(size => `
+                                <option value="${size}">${size}</option>
+                            `).join('')}
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                </div>
+            </div>` : '';
+
+        const colorSelector = data.colors.length > 0 ? `
+            <div class="flex-w flex-r-m p-b-10">
+                <div class="size-203 flex-c-m respon6">Color</div>
+                <div class="size-204 respon6-next">
+                    <div class="rs1-select2 bor8 bg0">
+                        <select class="js-select2 color-select"
+                            ${['color', 'both'].includes(data.mandatory) ? 'required' : ''}>
+                            <option value="">Choose color</option>
+                            ${data.colors.map(color => `
+                                <option value="${color}">${color}</option>
+                            `).join('')}
+                        </select>
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                </div>
+            </div>` : '';
+
+        const imageSections = `
+            <div class="row">
+                <div class="col-3 pr-2">
+                    <div class="vertical-thumbnails">
+                        ${data.images.map((image, index) => `
+                            <div class="thumbnail-item ${index === 0 ? 'active' : ''}"
+                                data-index="${index}">
+                                <img src="${image}"
+                                    alt="Thumbnail ${index + 1}"
+                                    class="img-fluid">
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="col-9 pl-2">
+                    <div class="slick3 gallery-lb">
+                        ${data.images.map(image => `
+                            <div class="item-slick3" data-thumb="${image}">
+                                <div class="wrap-pic-w pos-relative">
+                                    <img src="${image}" alt="${data.name}">
+                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                        href="${image}">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>`;
+
+        return `
+            <div class="row">
+                <div class="col-md-6 col-lg-7 p-b-30">
+                    <div class="p-l-25 p-r-30 p-lr-0-lg">
+                        ${imageSections}
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-5 p-b-30">
+                    <div class="p-r-50 p-t-5 p-lr-0-lg">
+                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">${data.name}</h4>
+                        <div class="flex-w mb-3">
+                            <span class="stext-102 cl3">SKU: ${data.sku}</span>
+                        </div>
+                        ${priceHtml}
+                        ${data.description.split('\n').map(paragraph => `<p class="stext-102 cl3 p-t-23">${paragraph}</p>`).join('')}
+
+                        <div class="p-t-33">
+                            ${sizeSelector}
+                            ${colorSelector}
+                            <div class="flex-w flex-r-m p-b-10">
+                                <div class="size-204 flex-w flex-m respon6-next">
+                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-minus"></i>
+                                        </div>
+                                        <input class="mtext-104 cl3 txt-center num-product"
+                                            type="number" name="quantity" value="1" min="1">
+                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                            <i class="fs-16 zmdi zmdi-plus"></i>
+                                        </div>
+                                    </div>
+                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-quickview"
+                                        data-product-id="${productId}"
+                                        data-mandatory="${data.mandatory}">
+                                        Add to cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+    }
+
+    // Initialize Slick Slider
+    function initSlickSlider() {
+        const slider = $('.slick3').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: true,
+            dots: true,
+            appendDots: '.wrap-slick3-dots',
+            dotsClass: 'slick3-dots',
+            appendArrows: '.wrap-slick3-arrows',
+            prevArrow: '<button class="arrow-slick3 prev-slick3"><i class="fa fa-angle-left"></i></button>',
+            nextArrow: '<button class="arrow-slick3 next-slick3"><i class="fa fa-angle-right"></i></button>',
+        });
+    }
+
+    // Thumbnail click handler
+    function initThumbnailClickHandler() {
+        document.querySelectorAll('.thumbnail-item').forEach(thumbnail => {
+            thumbnail.addEventListener('click', function () {
+                const index = parseInt(this.dataset.index);
+                const slickSlider = $('.slick3');
+                slickSlider.slick('slickGoTo', index);
             });
         });
     }
-    initPerfectScrollbar();
+
+    // Initialize Select2
+    function initSelect2() {
+        $('.js-select2').select2({
+            minimumResultsForSearch: 20,
+            dropdownParent: $('#dropDownSelect2')
+        });
+    }
+
+    // Magnific Popup for image zoom
+    function initMagnificPopup() {
+        $('.gallery-lb').each(function () {
+            $(this).magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                gallery: {
+                    enabled: true
+                }
+            });
+        });
+    }
+});
 </script>
+
 <!--===============================================================================================-->
 <script src="{% static 'js/main.js' %}"></script>
 </body>

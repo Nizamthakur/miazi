@@ -57,7 +57,7 @@
 </head>
 <body class="animsition">
 
-    <!-- Header -->
+   <!-- Header -->
     <header>
         <!-- Header desktop -->
         <div class="container-menu-desktop">
@@ -68,7 +68,7 @@
                 <nav class="limiter-menu-desktop container">
 
                     <!-- Logo desktop -->
-                    <a href="#" class="logo">
+                    <a href="{% url 'home' %}" class="logo" style="margin-top:20px;">
                         <img src="{% static 'images/icons/logo1.png' %}" alt="IMG-LOGO">
                     </a>
 
@@ -77,31 +77,25 @@
                         <ul class="main-menu">
                             <li class="active-menu">
                                 <a href="{% url 'home' %}">Home</a>
-                                <ul class="sub-menu">
-                                    <li><a href="index.html">Homepage 1</a></li>
-                                    <li><a href="home-02.html">Homepage 2</a></li>
-                                    <li><a href="home-03.html">Homepage 3</a></li>
-                                </ul>
                             </li>
-
                             <li>
-                                <a href="product.html">Shop</a>
+                                <a href="{% url 'product_view' %}">Shop</a>
                             </li>
 
                             <li class="label1" data-label1="hot">
-                                <a href="shoping-cart.html">Features</a>
+                                <a href="{% url 'featured_products' %}">Features</a>
                             </li>
 
-                            <li>
-                                <a href="blog.html">Blog</a>
-                            </li>
+<!--                            <li>-->
+<!--                                <a href="blog.html">Blog</a>-->
+<!--                            </li>-->
+
+<!--                            <li>-->
+<!--                                <a href="about.html">About</a>-->
+<!--                            </li>-->
 
                             <li>
-                                <a href="about.html">About</a>
-                            </li>
-
-                            <li>
-                                <a href="contact.html">Contact</a>
+                                <a href="{% url 'contact' %}">Contact</a>
                             </li>
                         </ul>
                     </div>
@@ -116,9 +110,10 @@
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
 
-                        <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-                            <i class="zmdi zmdi-favorite-outline"></i>
-                        </a>
+                        <a href="{% url 'wishlist' %}" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+   data-notify="{% if request.user.is_authenticated %}{{ request.user.wishlist.products.count }}{% else %}0{% endif %}" id="wishlist-count">
+    <i class="zmdi zmdi-favorite-outline"></i>
+</a>
                     </div>
                 </nav>
             </div>
@@ -128,7 +123,7 @@
         <div class="wrap-header-mobile">
             <!-- Logo mobile -->
             <div class="logo-mobile">
-                <a href="index.html"><img src="{% static 'images/icons/logo1.png' %}" alt="IMG-LOGO"></a>
+                <a href="{% url 'home' %}"><img src="{% static 'images/icons/logo1.png' %}" alt="IMG-LOGO"></a>
             </div>
 
             <!-- Icon header -->
@@ -160,35 +155,30 @@
 
             <ul class="main-menu-m">
                 <li>
-                    <a href="index.html">Home</a>
-                    <ul class="sub-menu-m">
-                        <li><a href="index.html">Homepage 1</a></li>
-                        <li><a href="home-02.html">Homepage 2</a></li>
-                        <li><a href="home-03.html">Homepage 3</a></li>
-                    </ul>
-                    <span class="arrow-main-menu-m">
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </span>
+                    <a href="{% url 'home' %}">Home</a>
+<!--                    <span class="arrow-main-menu-m">-->
+<!--                        <i class="fa fa-angle-right" aria-hidden="true"></i>-->
+<!--                    </span>-->
                 </li>
 
                 <li>
-                    <a href="product.html">Shop</a>
+                    <a href="{% url 'product_view' %}">Shop</a>
                 </li>
 
                 <li>
-                    <a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+                    <a href="{% url 'featured_products' %}" class="label1 rs1" data-label1="hot">Features</a>
                 </li>
 
-                <li>
-                    <a href="blog.html">Blog</a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="blog.html">Blog</a>-->
+<!--                </li>-->
+
+<!--                <li>-->
+<!--                    <a href="about.html">About</a>-->
+<!--                </li>-->
 
                 <li>
-                    <a href="about.html">About</a>
-                </li>
-
-                <li>
-                    <a href="contact.html">Contact</a>
+                    <a href="{% url 'contact' %}">Contact</a>
                 </li>
             </ul>
         </div>
@@ -208,7 +198,6 @@
                 </form>
             </div>
         </div>
-
     </header>
     <!--wishlist-->
 <section class="bg0 p-t-23 p-b-140"style="margin-top: 60px;">
@@ -235,9 +224,10 @@
 
                     <div class="block2-txt flex-w flex-t p-t-14">
                         <div class="block2-txt-child1 flex-col-l">
-                            <span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                {{ product.name }}
-                            </span>
+                            <a href="#" class="stext-104 cl4 hov-cl1 trans-04 js-show-modal1 p-b-6"
+                                   data-product-id="{{ product.id }}">
+                                    {{ product.name }}
+                                </a>
                             <span class="stext-105 cl3 sku-text mb-2">
                                 SKU: {{ product.sku }}
                             </span>
@@ -302,7 +292,7 @@
     </div>
 </section>
     <!--wishlist-->
-<!-- Footer -->
+ <!-- Footer -->
     <footer class="bg3 p-t-75 p-b-32">
         <div class="container">
             <div class="row">
@@ -310,12 +300,12 @@
 
                 <div class="col-sm-6 col-lg-4 p-b-50">
                     <h4 class="stext-301 cl0 p-b-30">
-                        Help
+                        Help Desk
                     </h4>
 
                     <ul>
                         <li class="p-b-10">
-                            <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                            <a href="https://steadfast.com.bd/tracking" class="stext-107 cl7 hov-cl1 trans-04">
                                 Track Order
                             </a>
                         </li>
@@ -347,19 +337,19 @@
                     </h4>
 
                     <p class="stext-107 cl7 size-201">
-                        Any questions? Let us know in store at 2nd floor, 201 North Sajhanpur, Dhaka 1219 or call us on +8801601843115.
+                        Any questions? Let us know in store at 192/A , Tilpapara, Khilgaon, Dhaka 1219 or call us on +8801707365693.
                     </p>
 
                    <div class="p-t-27">
-                        <a href="https://www.facebook.com/profile.php?id=100033197297185" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                        <a href="https://www.facebook.com/profile.php?id=61572220262415" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                             <i class="fa fa-facebook"></i>
                         </a>
 
-                        <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                        <a href="https://www.instagram.com/miabaaba/" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                             <i class="fa fa-instagram"></i>
                         </a>
 
-                        <a href="https://wa.me/8801601843115?text=Hello%2C%20I%20have%20a%20question%20about%20your%20products%20of%20Goyna-kotha!" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+                        <a href="https://wa.me/8801707365693?text=Hello%2C%20I%20have%20a%20question%20about%20your%20products%20of%20Miabaaba!" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
                             <i class="fa fa-whatsapp"></i> <!-- Added WhatsApp -->
                         </a>
 
@@ -415,7 +405,7 @@
             </div>
 
                 <p class="stext-107 cl6 txt-center">
-                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://teccmark.com" target="_blank">Goynakotha</a> &amp; distributed by <a href="https://teccmark.com" target="_blank">Teccmark!</a>
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | by <a href="https://teccmark.com" target="_blank">Miabaaba</a>
                 </p>
             </div>
         </div>

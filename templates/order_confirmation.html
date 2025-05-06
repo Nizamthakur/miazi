@@ -96,35 +96,64 @@
     <h1>Order Confirmation</h1>
 
     <div class="order-details">
-        <h2>Thank you for your order!</h2>
-        <p>Your order ID: <strong>{{ order.id }}</strong></p>
-        <p>Order Date: <strong>{{ order.created_at|date:"F j, Y, g:i a" }}</strong></p>
-        <p>Payment Method: <strong>{{ order.payment_method }}</strong></p>
-        <p>Delivery Address: <strong>{{ order.address }}</strong></p>
-        <p>Contact Number: <strong>{{ order.phone }}</strong></p>
+    <h2>Thank you for your order!</h2>
+    <p>Your order ID: <strong>{{ order.order_id }}</strong></p>
+    <p>Order Date: <strong>{{ order.created_at|date:"F j, Y, g:i a" }}</strong></p>
+    <p>Payment Method: <strong>{{ order.payment_method }}</strong></p>
+    <p>Delivery Address: <strong>{{ order.address }}</strong></p>
+    <p>Contact Number: <strong>{{ order.phone }}</strong></p>
+
+    <h3>Order Items:</h3>
+    <div class="order-items">
+        {% for item in order.items.all %}
+        <div class="order-item">
+            <p>Product: <strong>{{ item.product.name }}</strong></p>
+            <p>Quantity: <strong>{{ item.quantity }}</strong></p>
+            {% if item.size %}<p>Size: <strong>{{ item.size }}</strong></p>{% endif %}
+            {% if item.color %}<p>Color: <strong>{{ item.color }}</strong></p>{% endif %}
+            <p>Price: <strong>{{ item.price|floatformat:2 }}</strong></p>
+        </div>
+        {% endfor %}
     </div>
 
+    <p class="total">Total Amount: <strong>{{ order.total_amount|floatformat:2 }}</strong></p>
+</div>
+
     <div class="order-items">
-        <h2>Order Items</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in order.cart.items.all %}
-                <tr>
-                    <td>{{ item.product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>৳{{ item.product.price|floatformat:2 }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h2>Order Items</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Size</th>
+                <th>Color</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>
+                    {% if item.size %}{{ item.size }}{% else %}N/A{% endif %}
+                </td>
+                <td>
+                    {% if item.color %}{{ item.color }}{% else %}N/A{% endif %}
+                </td>
+                <td>৳{{ item.price|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4"><strong>Total Amount:</strong></td>
+                <td><strong>৳{{ order.total_amount|floatformat:2 }}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 
     <div class="total">
         <p>Total Amount: <strong>৳{{ order.total_amount|floatformat:2 }}</strong></p>

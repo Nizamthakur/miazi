@@ -8,6 +8,7 @@ from django.db.models.functions import TruncDate, TruncWeek, TruncMonth
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from xhtml2pdf import pisa
+from django.templatetags.static import static
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('name', 'rating')
@@ -49,13 +50,24 @@ class OrderAdmin(admin.ModelAdmin):
     )
 
     def formatted_order_id(self, obj):
+        # Get SKU from the first item in the order (if available)
         if obj.items.exists():
             first_item = obj.items.first()
             sku = first_item.product.sku if first_item.product else "N/A"
         else:
             sku = "N/A"
-        order_date = obj.created_at.strftime('%d-%m')
-        return f"{sku}-{order_date}"
+
+        # Get order date in DDMM format
+        order_date = obj.created_at.strftime('%d%m')
+
+        # Check if order_id is numeric, if not use the UUID and generate a unique order number
+        if isinstance(obj.order_id, int):
+            order_number = str(obj.order_id).zfill(5)  # Zero pad to 5 digits
+        else:
+            order_number = str(abs(hash(obj.order_id)) % (10 ** 5)).zfill(
+                5)  # Fallback to a hash-based unique ID (5 digits)
+
+        return f"{sku}-{order_date}-{order_number}"
 
     formatted_order_id.short_description = 'Order ID'
 
@@ -83,10 +95,12 @@ class OrderAdmin(admin.ModelAdmin):
 
             context = {
                 'order': order,
+                'formatted_order_id': self.formatted_order_id(order),  # Use admin method here
                 'order_items': order_items,
                 'subtotal': subtotal,
                 'total': order.total_amount,
                 'date': timezone.now().strftime("%d %b, %Y"),
+                'logo_url': request.build_absolute_uri(static('images/icons/logo1.png')),
             }
 
             html_string = render_to_string('admin/order_invoice.html', context)

@@ -67,6 +67,7 @@ def quick_view(request, product_id):
             'price': "{:.2f}".format(product.price),
             'sale_price': "{:.2f}".format(product.sale_price) if product.sale_price else None,
             'description': product.description,
+            'description_parts': product.description.split(','),  # Split the description into parts
             'images': [main_image_url] + other_images,
             'sizes': product.get_size_list(),
             'colors': product.get_color_list(),
@@ -79,6 +80,7 @@ def quick_view(request, product_id):
         return JsonResponse({'error': 'Product not found'}, status=404)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
 
 
 def return_policy(request):
